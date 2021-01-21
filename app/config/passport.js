@@ -16,6 +16,7 @@ if (process.env.NODE_ENV === "production") {
 
 //! Load User model
 const User = require("../models/User");
+const Token = require("../models/Token");
 
 module.exports = (passport) => {
   passport.use(
@@ -64,15 +65,31 @@ module.exports = (passport) => {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: cbGoogleURI
-  }, (accessToken, refreshToken, profile, done) => {
-    console.log(profile)
-    User.create({ name: profile.displayName, googleToken: accessToken })
-      .then((user) => {
-        user.isVerified = true
-        user.save()
-        return done(null, user)
-      })
-      .catch((err) => done(err, null))
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      const userExists = await User.findOne({ googleUserId: profile.id })
+
+      if (userExists) {
+        const checkTokenExists = await Token.findOne({ token: accessToken })
+
+        if (checkTokenExists) {
+          return done(null, userExists)
+        } else {
+          await Token.create({ token: accessToken, userId: userExists._id })
+          return done(null, userExists)
+        }
+
+      } else {
+        const newUser = await User.create({ name: profile.displayName, googleUserId: profile.id, isVerified: true })
+
+        await Token.create({ token: accessToken, userId: newUser._id })
+
+        return done(null, newUser)
+      }
+
+    } catch (e) {
+      return done(e, null)
+    }
   }))
 
   //! Github Strategy
@@ -82,15 +99,32 @@ module.exports = (passport) => {
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: cbGitURI
 
-  }, (accessToken, refreshToken, profile, done) => {
+  }, async (accessToken, refreshToken, profile, done) => {
 
-    User.create({ name: profile.displayName, email: profile.emails[0].value, githubToken: accessToken })
-      .then((user) => {
-        user.isVerified = true
-        user.save()
-        return done(null, user)
-      })
-      .catch((err) => done(err, null))
+    try {
+      const userExists = await User.findOne({ githubUserId: profile.id })
+
+      if (userExists) {
+        const checkTokenExists = await Token.findOne({ token: accessToken })
+
+        if (checkTokenExists) {
+          return done(null, userExists)
+        } else {
+          await Token.create({ token: accessToken, userId: userExists._id })
+          return done(null, userExists)
+        }
+
+      } else {
+        const newUser = await User.create({ name: profile.displayName, githubUserId: profile.id, isVerified: true })
+
+        await Token.create({ token: accessToken, userId: newUser._id })
+
+        return done(null, newUser)
+      }
+
+    } catch (e) {
+      return done(e, null)
+    }
 
   }))
 
