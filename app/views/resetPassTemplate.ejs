@@ -15,7 +15,7 @@
   <h3>
     Mohon untuk mengklik link ini: <br />
 
-    <a href="https://<%= getHost %>/users/reset-pass?getToken=<%=getToken%> ">
+    <a href="<%=getProtocol%>://<%= getHost %>/users/reset-pass?getToken=<%=getToken%> ">
       <button
         style="
           width: 40%;
@@ -32,8 +32,8 @@
   <br />
   <h3>
     Jika Tombol diatas tidak berfungsi,silahkan klik link ini:
-    <a href="https://<%= getHost %>/users/reset-pass?getToken=<%=getToken%> "
-      >https://<%= getHost %>/users/reset-pass?getToken=<%=getToken%>
+    <a href="<%=getProtocol%>://<%= getHost %>/users/reset-pass?getToken=<%=getToken%> "
+      ><%=getProtocol%>://<%= getHost %>/users/reset-pass?getToken=<%=getToken%>
     </a>
   </h3>
   <h3>Hormat Kami</h3>

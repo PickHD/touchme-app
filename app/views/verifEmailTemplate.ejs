@@ -16,7 +16,7 @@
   <h3>
     Mohon verifikasi akun anda dengan mengklik link ini: <br />
     <a
-      href="https://<%= getHost %>/users/email-verification?getToken=<%=getToken%> "
+      href="<%=getProtocol%>://<%= getHost %>/users/email-verification?getToken=<%=getToken%> "
     >
       <button
         style="
@@ -35,8 +35,8 @@
   <h3>
     Jika Tombol diatas tidak berfungsi,silahkan klik link ini:
     <a
-      href="https://<%= getHost %>/users/email-verification?getToken=<%=getToken%>"
-      >https://<%= getHost %>/users/email-verification?getToken=<%=getToken%></a
+      href="<%=getProtocol%>://<%= getHost %>/users/email-verification?getToken=<%=getToken%>"
+      ><%=getProtocol%>://<%= getHost %>/users/email-verification?getToken=<%=getToken%></a
     >
   </h3>
   <h3>Hormat Kami</h3>
