@@ -24,38 +24,34 @@ module.exports = (passport) => {
       {
         usernameField: "email",
       },
-      (email, password, done) => {
-        //?Match User
-        User.findOne({
-          email: email,
-        })
-          .then((user) => {
-            if (!user) {
-              return done(null, false, {
-                message:
-                  "Email Tersebut tidak terdaftar,silahkan register terlebih dahulu",
-              });
-            }
-            if (user.isVerified === false) {
-              return done(null, false, {
-                message:
-                  "Email Tersebut belum terverifikasi,silahkan verifikasi email terlebih dahulu",
-              });
-            }
-
-            //? Match password
-            bCrypt.compare(password, user.password, (err, isMatch) => {
-              if (err) throw err;
-              if (isMatch) {
-                return done(null, user);
-              } else {
-                return done(null, false, {
-                  message: "Password salah,silahkan coba lagi",
-                });
-              }
+      async (email, password, done) => {
+        try {
+          const checkEmailUser = await User.findOne({ email: email })
+          if (!checkEmailUser) {
+            return done(null, false, {
+              message:
+                "Email Tersebut tidak terdaftar,silahkan register terlebih dahulu",
             });
-          })
-          .catch((err) => console.error(err));
+          }
+          if (checkEmailUser.isVerified === false) {
+            return done(null, false, {
+              message:
+                "Email Tersebut belum terverifikasi,silahkan verifikasi email terlebih dahulu",
+            });
+          }
+
+          const checkPassword = await bCrypt.compare(password, checkEmailUser.password)
+
+          if (checkPassword) {
+            return done(null, checkEmailUser)
+          } else {
+            return done(null, false, {
+              message: "Password salah,silahkan coba lagi",
+            });
+          }
+        } catch (e) {
+          return done(e,null)
+        }
       }
     )
   );
