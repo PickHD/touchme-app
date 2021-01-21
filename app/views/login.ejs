@@ -1,0 +1,36 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> Masuk</h1>
+      <%- include ("./partials/message") %>
+        <form action="/users/login" method="POST" autocomplete="on">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required inputmode="email" autocomplete="username"
+              class="form-control" placeholder="contoh : emailmu@gmail.com" />
+          </div>
+          <div class="form-group">
+            <label for="password">Kata sandi</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password"
+              class="form-control" placeholder="Masukan Kata Sandi" />
+            <i class="fas fa-eye btn-show-hide-pwd" data-for="password"></i>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+        </form>
+
+        <button type="button" class="btn btn-danger btn-block"><i class="fab fa-google"></i> <a class="nodecor"
+            href="/users/login/oauth/google">Masuk menggunakan Google</a></button> <br>
+        <button type="button" class="btn btn-secondary btn-block"><i class="fab fa-github"></i> <a class="nodecor"
+            href="/users/login/oauth/github">Masuk menggunakan Github</a></button>
+        <p class="lead mt-4">
+          Tidak punya akun? <a href="/users/register">Buat akun baru</a>
+        </p>
+        <p class="lead">
+          Lupa password? <a href="/users/forgot-password">Reset Password</a>
+        </p>
+        <p class="lead mr-5">
+          <a href="/"><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+        </p>
+    </div>
+  </div>
+</div>
