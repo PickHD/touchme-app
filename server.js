@@ -35,7 +35,7 @@ app.use(favicon(path.join(__dirname, "./app/public/favicon.ico")));
 //! Express Session Middleware
 app.use(
   session({
-    secret: "ihavenosecret",
+    secret: process.env.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
   })
