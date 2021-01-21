@@ -17,13 +17,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default:null
   },
-  googleToken: {
-    type: String,
-    default: null
+  googleUserId:{
+    type:String,
+    default:null
   },
-  githubToken: {
-    type: String,
-    default: null
+  githubUserId:{
+    type:String,
+    default:null
   },
   createdAt: {
     type: Date,
