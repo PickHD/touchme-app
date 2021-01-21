@@ -94,6 +94,7 @@ exports.signup = async (req, res) => {
           {
             getUser: newUser.name,
             getHost: req.headers.host,
+            getProtocol:req.protocol,
             getToken: newToken.token,
             getDate: newToken.createdAt,
           },
@@ -284,6 +285,7 @@ exports.tokenPass = async (req, res) => {
         {
           getUser: getEmail.name,
           getHost: req.headers.host,
+          getProtocol:req.protocol,
           getToken: newTokenPass.token,
           getDate: newTokenPass.createdAt,
         },
