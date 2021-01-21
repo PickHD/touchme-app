@@ -1,0 +1,17 @@
+.btn-show-hide-pwd {
+  color: whitesmoke;
+  cursor: pointer;
+  float: left;
+  padding: 10px;
+  opacity: 0.5;
+}
+.btn-show-hide-pwd:hover {
+  opacity: 1;
+}
+.btn-show-hide-pwd:active {
+  transform: scale(0.9);
+}
+.nodecor,.nodecor:hover{
+  text-decoration: none;
+  color: white;
+}
