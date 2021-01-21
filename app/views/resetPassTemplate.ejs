@@ -1,0 +1,42 @@
+<%- include("./partials/headerLink") %>
+<h4><i><%=getDate %></i></h4>
+<div
+  style="
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: lighter;
+  "
+>
+  <h1>KONFIRMASI RESET PASSWORD</h1>
+  <hr style="border: 10px solid black; border-radius: 5px;" />
+  <br />
+  <h3>Hai,<%= getUser %></h3>
+  <h3>
+    Mohon untuk mengklik link ini: <br />
+
+    <a href="https://<%= getHost %>/users/reset-pass?getToken=<%=getToken%> ">
+      <button
+        style="
+          width: 40%;
+          height: auto;
+          background-color: silver;
+          border-radius: 10px;
+        "
+      >
+        <b>RESET</b>
+      </button></a
+    >
+  </h3>
+  <br />
+  <br />
+  <h3>
+    Jika Tombol diatas tidak berfungsi,silahkan klik link ini:
+    <a href="https://<%= getHost %>/users/reset-pass?getToken=<%=getToken%> "
+      >https://<%= getHost %>/users/reset-pass?getToken=<%=getToken%>
+    </a>
+  </h3>
+  <h3>Hormat Kami</h3>
+</div>
+
+<%- include("./partials/footerLink") %>
