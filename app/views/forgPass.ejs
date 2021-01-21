@@ -1,0 +1,31 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-unlock-alt"></i> Lupa Password
+      </h1>
+      <%- include ("./partials/message") %>
+      <form action="/users/recover/token" method="POST">
+        <div class="form-group">
+          <label for="email">Email Anda</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Cari Email Anda"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Kirim
+        </button>
+      </form>
+
+      <p class="lead mt-5">
+        <a href="/users/login"
+          ><i class="fas fa-arrow-circle-left fa-2x"></i
+        ></a>
+      </p>
+    </div>
+  </div>
+</div>
